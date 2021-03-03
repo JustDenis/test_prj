@@ -1,30 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import '../constant/colors.dart';
 
-class Screen1 extends StatelessWidget {
+class Screen1 extends StatefulWidget {
   const Screen1({Key key}) : super(key: key);
 
   static const routeName = '/screen_1';
 
   @override
+  _Screen1State createState() => _Screen1State();
+}
+
+class _Screen1State extends State<Screen1> {
+  final _scrollController = ScrollController(initialScrollOffset: 50.0);
+  @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Roboto'),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: const Color(0xffB9B9B9),
+        backgroundColor: ProjectColor.scaffoldGrey,
         body: SafeArea(
           child: Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                constraints: const BoxConstraints(
-                  minHeight: 530,
-                  maxHeight: 605,
+                constraints: BoxConstraints(
+                  maxHeight: screenHeight > 568 ? 605 : 500,
                 ),
                 decoration: BoxDecoration(
-                  color: const Color(0xffFFFFFF),
+                  color: ProjectColor.white,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Column(
@@ -45,7 +52,8 @@ class Screen1 extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () => Navigator.of(context).pop(),
-                            child: Image.asset('assets/icons/Close.png'),
+                            child: Image.asset(
+                                'assets/icons/Close.png'), // Here i`m using png because package "flutter_svg" can`t install. Erorr: Because test_prj depends on flutter_svg >=0.19.2 which requires Flutter SDK version >=1.24.0-6.0.pre, version solving failed
                           ),
                         ],
                       ),
@@ -64,16 +72,18 @@ class Screen1 extends StatelessWidget {
                     const SizedBox(height: 16),
                     Container(
                       padding: const EdgeInsets.only(right: 3),
-                      constraints: const BoxConstraints(
-                        maxHeight: 400,
-                        minHeight: 308,
+                      constraints: BoxConstraints(
+                        maxHeight: screenHeight > 568 ? 400 : 250,
                       ),
                       decoration: const BoxDecoration(
                         color: Color(0xffDFDEDE),
                       ),
-                      child: const Scrollbar(
+                      child: Scrollbar(
+                        controller: _scrollController,
+                        isAlwaysShown: true,
                         child: SingleChildScrollView(
-                          child: Padding(
+                          controller: _scrollController,
+                          child: const Padding(
                             padding: EdgeInsets.all(16),
                             child: Text(""" 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis convallis justo non nisi placerat maximus. Praesent tincidunt ut dui fermentum aliquam. Donec nec sodales mi. Proin ultrices dignissim ullamcorper. Nam eu consectetur nunc. Vivamus facilisis fermentum varius. Integer rutrum, ligula ac tempus maximus, erat justo molestie mauris, tempor porta tellus elit egestas ante. Proin ac leo quis felis posuere dapibus id et felis. Aenean id mattis nulla. Sed at nibh et tortor tempor malesuada. Quisque egestas urna tellus, in tristique risus ultricies laoreet. Donec fringilla, est non dapibus tempor, nulla metus lacinia arcu, at mattis ex dui nec massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras consequat id purus consectetur malesuada.
@@ -93,7 +103,7 @@ Vestibulum ut dui id quam feugiat viverra at ut dui. Ut placerat consequat iacul
                         horizontal: 24,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xffDB00FF),
+                        color: ProjectColor.buttonPink,
                         borderRadius: BorderRadius.circular(100),
                       ),
                       child: const FlatButton(
@@ -102,7 +112,7 @@ Vestibulum ut dui id quam feugiat viverra at ut dui. Ut placerat consequat iacul
                         child: Text(
                           'TEST BUTTON',
                           style: TextStyle(
-                            color: Color(0xffFFFFFF),
+                            color: ProjectColor.white,
                             fontWeight: FontWeight.w700,
                           ),
                         ),

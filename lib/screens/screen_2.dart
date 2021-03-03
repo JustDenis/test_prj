@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import '../constant/colors.dart';
 import '../providers/horizontal_items.dart';
 import '../providers/vertical_items.dart';
 
@@ -15,7 +16,7 @@ class Screen2 extends StatelessWidget {
       theme: ThemeData(fontFamily: 'Roboto'),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: const Color(0xffFFFFFF),
+        backgroundColor: ProjectColor.white,
         body: SafeArea(
           child: Column(
             children: [
@@ -26,7 +27,8 @@ class Screen2 extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: InkWell(
                     onTap: () => Navigator.of(context).pop(),
-                    child: Image.asset('assets/icons/Close.png'),
+                    child: Image.asset(
+                        'assets/icons/Close.png'), // Here i`m using png because package "flutter_svg" can`t install. Erorr: Because test_prj depends on flutter_svg >=0.19.2 which requires Flutter SDK version >=1.24.0-6.0.pre, version solving failed
                   ),
                 ),
               ),
@@ -87,7 +89,7 @@ class Screen2 extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 79, vertical: 57),
         decoration: BoxDecoration(
-          color: const Color(0xffFFFFFF),
+          color: ProjectColor.white,
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
